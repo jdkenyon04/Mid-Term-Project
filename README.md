@@ -7,6 +7,7 @@ Thing to do:
 2. Stretch Goals
 3. Double Check firePlayer with Prof.
 4. Double Check printByPlayer to see if I can do it without capitals
-5. Double Check how to print something in color with prof. 
-6. Test all funciton in main.
+5. Double Check how to print something in color with prof.
+6. Double Check on how to compare only first character of two Strings with prof.
+7. Test all funciton in main.
    
