@@ -36,6 +36,9 @@ public class Coach  {
     }
 
     public void printAllHiredPlayers(){
+        if(hiredPlayers.length == 0) {
+            System.out.println("You have no hired players!");
+        }
         for(int i = 0; i < hiredPlayers.length; i++){
             if(hiredPlayers[i]!= null){
                 if(hiredPlayers[i].getInjured().equals("Yes")){
@@ -76,49 +79,37 @@ public class Coach  {
         }
     }
 
-    public void sortByAge(Players[] hiredPlayers){
-        if(hiredPlayers == null || hiredPlayers.length == 0){
-            throw new IllegalArgumentException("hiredPlayer[] must not be null and be have a length of at least 1");
-        }
-        for(int i = 0; i < hiredPlayers.length - 1; i++){
+    public void sortByAge(){
+        for(int i = 0; i < allPlayers.length - 1; i++){
             int minIndex = i;
-            for(int j = i + 1; j < hiredPlayers.length; j++){
-                if(hiredPlayers[j].getAge() < hiredPlayers[minIndex].getAge()){
+            for(int j = i + 1; j < allPlayers.length; j++){
+                if(allPlayers[j].getAge() < allPlayers[minIndex].getAge()){
                     minIndex = j;
                 }
             }
             if(minIndex != i){
-                Players temp = hiredPlayers[i];
-                hiredPlayers[i] = hiredPlayers[minIndex];
-                hiredPlayers[minIndex] = temp;
+                Players temp = allPlayers[i];
+                allPlayers[i] = allPlayers[minIndex];
+                allPlayers[minIndex] = temp;
             }
         }
     }
 
     public void sortByNationality() {
         int length = 0;
-        if(totalHiredPlayers == 0){
-            throw new IllegalArgumentException("Must have at least 1 hired player!");
-        }
-
-        for(int i = 0; i < hiredPlayers.length; i++){
-            if(hiredPlayers[i] != null) {
-                length++;
-            }
-        }
-        for(int i = 0; i < length - 1; i++){
+        for(int i = 0; i < allPlayers.length - 1; i++){
             int minIndex = i;
-            for(int j = i + 1; j < length; j++) {
-                String str1 = hiredPlayers[minIndex].getNationality();
-                String str2 = hiredPlayers[j].getNationality();
+            for(int j = i + 1; j < allPlayers.length; j++) {
+                String str1 = allPlayers[minIndex].getNationality();
+                String str2 = allPlayers[j].getNationality();
                 if(str1.compareTo(str2) > 0){
                     minIndex = j;
                 }
             }
             if (minIndex!=i){
-                Players temp = hiredPlayers[i];
-                hiredPlayers[i] = hiredPlayers[minIndex];
-                hiredPlayers[minIndex] = temp;
+                Players temp = allPlayers[i];
+                allPlayers[i] = allPlayers[minIndex];
+                allPlayers[minIndex] = temp;
 
             }
         }
@@ -201,3 +192,4 @@ public class Coach  {
         System.out.println(name + " was fired! Total wage is now " + totalWage);
     }
 }
+
