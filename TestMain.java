@@ -1,20 +1,22 @@
 import java.io.File;
+import java.util.Scanner;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
+
 public class TestMain {
 
-	private static int getLineCount(String path) throws IOException {
-		File file = new File(path);
-		int lineCount = 0;
-		
+ 	private static int getLineCount(String path) throws IOException {
+ 		File file = new File(path);
+ 		int lineCount = 0;
+ 		
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))){
-			while(reader.readLine() != null) {
+	 		while(reader.readLine() != null) {
 				lineCount++;
 			}
 			}
-		catch(IOException e) {
+	 	catch(IOException e) {
 			throw e;
 		}
 		return lineCount;
@@ -49,9 +51,9 @@ public class TestMain {
 		return players;
 	}
 	
+	public static String ANSI_RESET = "\u001B[0m";
 	
-	
-	
+	public static String ANSI_RED = "\u001B[31m";
 	
 	
 	public static void main(String[] args) {
@@ -72,13 +74,121 @@ public class TestMain {
 		catch(Exception e) {
 			System.out.println("An unexpected error occcured: " + e.getMessage());
 		}
-
-		if(players != null) {
-			for(int i = 0; i <players.length; i++) {
-				System.out.println(players[i]);
-			}
-		}
 		
-	}
+		Scanner input = new Scanner(System.in);
+		int selection;
+		String name;
+		
+		System.out.print("Hello Coach! Enter your name to start building your team: ");
+	 	name = input.nextLine();
+	 	Coach coach = new Coach(name, players);
+	 	
+	 	boolean active = true;
+	 	
+	 	while(active) {
+	 	System.out.println("\nShow all players: Enter 1");
+	 	System.out.println("Show all hired players: Enter 2");
+	 	System.out.println("Show players by position: Enter 3");
+	 	System.out.println("Sort players by goals scored: Enter 4");
+	 	System.out.println("Sort hired players by age: Enter 5");
+	 	System.out.println("Sort hired players by nationality: Enter 6");
+	 	System.out.println("Show player by name: Enter 7");
+	 	System.out.println("Hire player: Enter 8");
+	 	System.out.println("Fire player: Enter 9");
+	 	System.out.println("Show all healthy players: Enter 10");
+	 	System.out.println("Exit program: Enter 0");
+	 	System.out.print("Enter your selection here: ");
+	 	selection = input.nextInt();
+	 	input.nextLine();
+	 	
+	 	
+	 	
+	 	
+	 	switch(selection) {
+	 	
+	 	case 1:
+	 		coach.printAllPlayers();
+	 		break;
+	 	
+	 	case 2:
+	 		coach.printAllHiredPlayers();
+	 		break;
+	 	
+	 	case 3:
+	 		System.out.print("Enter position: ");
+	 		String position = input.nextLine();
+	 		input.nextLine();
+	 		coach.printByPosition(position);
+	 		break;
+	 	
+	 	case 4:
+	 		System.out.print("Enter goals scored: ");
+	 		int goalScored = input.nextInt();
+	 		input.nextLine();
+	 		coach.printByGoalsScored(goalScored);
+	 		break;
+	 	
+	 	case 5: //fix
+	 		coach.sortByAge(players);
+	 		break;
+	 	
+	 	case 6: //fix
+	 		coach.sortByNationality();
+	 		break;
+	 	
+	 	case 7:
+	 	{
+	 		System.out.print("Enter player name: ");
+	 	    String playerName = input.nextLine();
 
+	 	    if (playerName.isEmpty()) {
+	 	        System.out.println("Error: You must enter a name!");
+	 	        break;
+	 	    }
+
+	 	    coach.printByPlayer(playerName);
+	 	    break;}
+	 	
+	 	case 8:{
+	 		System.out.print("Enter player name to hire: ");
+	 	    String hireName = input.nextLine();
+
+	 	    if (hireName.isEmpty()) {
+	 	        System.out.println("Error: You must enter a name!");
+	 	        break;
+	 	    }
+
+	 	    coach.hirePlayer(hireName);
+	 	    break;}
+	 	
+	 	case 9:
+	 	{
+	 		System.out.print("Enter player name to fire: ");
+	 	    String fireName = input.nextLine();
+
+	 	    if (fireName.isEmpty()) {
+	 	        System.out.println("Error: You must enter a name!");
+	 	        break;
+	 	    }
+
+	 	    coach.firePlayer(fireName);
+	 	    break;}
+	 	
+	 	case 10:
+	 		coach.printAvailablePlayers();
+	 		break;
+	 		
+	 	case 0:
+	 		System.out.println("Goodbye!");
+	 		active = false;
+	 		break;
+	 	
+	 	default:
+	 		System.out.println("Invalid choice: Enter one of the options");
+	 		break;
+	 	
+	 	}
+ 	}
+
+ }
 }

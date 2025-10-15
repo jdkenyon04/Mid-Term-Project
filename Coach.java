@@ -8,8 +8,9 @@ public class Coach  {
     private int totalPlayers;
     private int totalHiredPlayers;
     private int totalWage;
+    private double totalWageLeft;
     private final int teamCap = 11;
-    private final int wageCap = 80000;
+    private final int wageCap = 100000;
 
     public Coach(String coachName, Players[] allPlayers) {
         if(coachName == null || coachName.isEmpty()){
@@ -23,12 +24,14 @@ public class Coach  {
         this.allPlayers = allPlayers;
     }
 
+    
     public void printAllPlayers(){
         for(int i = 0; i < allPlayers.length; i++){
             if(allPlayers[i].getInjured().equals("Yes")){
                 System.out.println(allPlayers[i]);
             }
-            System.out.println(allPlayers[i]);
+            else {
+            System.out.println(allPlayers[i]);}
         }
     }
 
@@ -127,7 +130,7 @@ public class Coach  {
         }
         for(int i = 0; i < allPlayers.length; i++){
             //Is there a way we can change this so it looks at it without capitals
-            if(allPlayers[i].getName().equals(name)){
+            if(allPlayers[i].getName().equalsIgnoreCase(name)){
                 System.out.println(allPlayers[i]);
             }
         }
@@ -174,7 +177,8 @@ public class Coach  {
         int year = calendar.get(Calendar.YEAR);
 
         System.out.println(name + " was hired! Contract expires: " + month + "/" + day + "/" + year);
-
+        System.out.println("Total wage is now $" + totalWage + ". ");
+        System.out.println(totalHiredPlayers + " players hired.");
     }
     
     //Need to go over this one ... I dont know if I rezise the array correctly or if there is another way of doing this.
@@ -194,5 +198,6 @@ public class Coach  {
             }
         }
         totalWage -= findPlayer(name).getWage();
+        System.out.println(name + " was fired! Total wage is now " + totalWage);
     }
 }
