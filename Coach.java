@@ -146,6 +146,10 @@ public class Coach  {
         if(totalHiredPlayers >= 11){
             throw new IllegalArgumentException("Cannot have more than 11 players");
         }
+        if(findPlayer(name) == null){
+            System.out.println("That player doesn't exist!");
+            return;
+        }
         if(findPlayer(name).getInjured().equals("Yes")) {
             throw new IllegalArgumentException(name + "is Injured!");
         }
@@ -175,7 +179,8 @@ public class Coach  {
     //Need to go over this one ... I dont know if I rezise the array correctly or if there is another way of doing this.
     public void firePlayer(String name){
         if(findPlayer(name) == null || totalHiredPlayers == 0){
-            throw new IllegalArgumentException("Player does not exist!");
+            System.out.println("That player doesn't exist!");
+            return;
         }
 
         for(int i = 0; i < totalHiredPlayers; i++) {
