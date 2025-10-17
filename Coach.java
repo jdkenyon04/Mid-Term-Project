@@ -12,6 +12,10 @@ public class Coach  {
     private final int teamCap = 11;
     private final int wageCap = 100000;
 
+    
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_RED = "\u001B[31m";
+    
     public Coach(String coachName, Players[] allPlayers) {
         if(coachName == null || coachName.isEmpty()){
             throw new IllegalArgumentException("coachName cannot be null or empty");
@@ -28,7 +32,7 @@ public class Coach  {
     public void printAllPlayers(){
         for(int i = 0; i < allPlayers.length; i++){
             if(allPlayers[i].getInjured().equals("Yes")){
-                System.out.println(allPlayers[i]);
+                System.out.println(ANSI_RED + allPlayers[i] + ANSI_RESET);
             }
             else {
             System.out.println(allPlayers[i]);}
@@ -63,8 +67,11 @@ public class Coach  {
         }
         for(int i = 0; i < allPlayers.length; i++){
             if(allPlayers[i].getPosition().equals(position)){
-                System.out.println(allPlayers[i]);
+            	
+            	System.out.println(allPlayers[i]);
+                
             }
+            
         }
     }
 
@@ -133,7 +140,7 @@ public class Coach  {
         }
         for(int i = 0; i < allPlayers.length; i++){
             if(allPlayers[i].getName().equals(name)){
-                return allPlayers[i]; 
+            	return allPlayers[i]; 
             } 
         }
         return null;

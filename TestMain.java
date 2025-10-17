@@ -108,9 +108,10 @@ public class TestMain {
                         break;
 
                     case 3:
+                    	System.out.println("Positions: GK, LB, RB, CB, CDM, CM, CAM, LW, RW, ST");
                         System.out.print("Enter position: ");
                         String position = input.nextLine();
-                        input.nextLine();
+                        
                         coach.printByPosition(position);
                         break;
 
@@ -190,5 +191,6 @@ public class TestMain {
                 input.nextLine();
             }
         }
+    input.close();
     }
 }
